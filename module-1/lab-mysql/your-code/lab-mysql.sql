@@ -158,3 +158,21 @@ INSERT INTO `lab-mysql`.`car` (`invoice_id_invoice`, `invoice_customer_id_custom
 VALUES (3, 3, 'DAM41UDN3CHU2WVF6', 'Volvo', 'V60 Cross Country', '2019', 'Gray');
 
 
+
+#Bonus Challenge - Updating and Deleting Database Records
+#SET SQL_SAFE_UPDATES = 0; (en caso de hacerlo desde Workbench)
+
+UPDATE customer 
+SET city = REPLACE(city, 'Mimia', 'Miami') WHERE city = 'Mimia';
+
+UPDATE customer 
+SET email = 'ppicasso@gmail.com' WHERE name = 'Pablo Picasso';
+
+UPDATE customer
+SET email = 'lincoln@us.gov' WHERE name = 'Abraham Lincoln';
+
+UPDATE customer
+SET email = 'hello@napoleon.me' WHERE name = 'Napoléon Bonaparte';
+
+DELETE FROM car WHERE model='V60 Cross Country';
+
