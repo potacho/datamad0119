@@ -64,16 +64,17 @@ GROUP BY authors.au_id, authors.au_fname, authors.au_lname, publishers.pub_name;
 
 
 #Challenge 3 - Best Selling Authors
-SELECT 
+SELECT DISTINCT 
 authors.au_id AS 'Author ID', 
 authors.au_lname AS 'Last Name', 
 authors.au_fname AS 'First Name', 
-COUNT(titleauthor.au_id) AS 'Total'
+SUM(sales.qty) OVER(PARTITION BY sales.title_id) AS 'Total'
 FROM authors
 INNER JOIN titleauthor ON authors.au_id = titleauthor.au_id
 INNER JOIN titles ON titleauthor.title_id = titles.title_id
-GROUP BY authors.au_id, authors.au_fname, authors.au_lname
-ORDER BY Total DESC
+INNER JOIN sales ON titles.title_id = sales.title_id
+GROUP BY authors.au_id, authors.au_lname, authors.au_fname, sales.qty, sales.title_id
+ORDER BY Total DESC, authors.au_lname ASC
 LIMIT 3;
 
 
