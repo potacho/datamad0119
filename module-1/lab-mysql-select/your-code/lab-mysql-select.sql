@@ -64,19 +64,39 @@ GROUP BY authors.au_id, authors.au_fname, authors.au_lname, publishers.pub_name;
 
 
 #Challenge 3 - Best Selling Authors
+
+#Usando LEFT JOIN (no puedo hacer DISTINCT)
 SELECT 
 authors.au_id AS 'Author ID', 
 authors.au_lname AS 'Last Name', 
 authors.au_fname AS 'First Name',
 #titleauthor.title_id, 
 #titles.title, sales.qty,
-SUM(sales.qty) OVER(PARTITION BY authors.au_id) AS 'Total'
+SUM(sales.qty) AS 'Total'
 FROM authors
 LEFT JOIN titleauthor ON authors.au_id = titleauthor.au_id
 LEFT JOIN titles ON titleauthor.title_id = titles.title_id
 LEFT JOIN sales ON titles.title_id = sales.title_id
-ORDER BY Total DESC, authors.au_id ASC
-LIMIT 14;
+GROUP BY authors.au_id, authors.au_lname, authors.au_fname
+ORDER BY SUM(sales.qty) DESC, authors.au_id ASC
+LIMIT 3;
+
+#Usando INNER JOIN
+SELECT 
+authors.au_id AS 'Author ID', 
+authors.au_lname AS 'Last Name', 
+authors.au_fname AS 'First Name',
+#titleauthor.title_id, 
+#titles.title, sales.qty,
+SUM(sales.qty) AS 'Total'
+FROM authors
+INNER JOIN titleauthor ON authors.au_id = titleauthor.au_id
+INNER JOIN titles ON titleauthor.title_id = titles.title_id
+INNER JOIN sales ON titles.title_id = sales.title_id
+GROUP BY authors.au_id, authors.au_lname, authors.au_fname
+ORDER BY SUM(sales.qty) DESC, authors.au_id ASC
+LIMIT 3;
+
 
 
 #Challenge 4 - Best Selling Authors Ranking
