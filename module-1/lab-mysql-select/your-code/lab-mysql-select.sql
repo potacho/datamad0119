@@ -116,5 +116,18 @@ ORDER BY SUM(sales.qty) DESC, authors.au_id ASC;
 
 
 
-#Bonus Challenge - Most Profiting Authors
+#Bonus Challenge - Most Profiting Authors (PENDIENTE DE TERMINAR)
+SELECT 
+authors.au_id AS 'Author ID', 
+authors.au_lname AS 'Last Name', 
+authors.au_fname AS 'First Name',
+#titleauthor.title_id, 
+#titles.title, sales.qty,
+SUM((sales.qty * sales.price * (sales.royalty/100)) + sales.advance) AS 'Profit'
+FROM authors
+LEFT JOIN titleauthor ON authors.au_id = titleauthor.au_id
+LEFT JOIN titles ON titleauthor.title_id = titles.title_id
+LEFT JOIN sales ON titles.title_id = sales.title_id
+GROUP BY authors.au_id, authors.au_lname, authors.au_fname
+ORDER BY Profit DESC, authors.au_id ASC;
 
