@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[107]:
+# In[184]:
 
 
 #1. Import the NUMPY package under the name np.
 import numpy as np
 
 
-# In[108]:
+# In[185]:
 
 
 #2. Print the NUMPY version and the configuration.
@@ -16,7 +16,7 @@ print(np.__version__)
 print(np.show_config())
 
 
-# In[109]:
+# In[186]:
 
 
 #3. Generate a 2x3x5 3-dimensional array with random values. Assign the array to variable "a"
@@ -28,14 +28,14 @@ a = np.random.random((2,3,5))
 #No vemos ninguna diferencia a simple vista.
 
 
-# In[110]:
+# In[187]:
 
 
 #4. Print a.
 print(a)
 
 
-# In[111]:
+# In[188]:
 
 
 #5. Create a 5x2x3 3-dimensional array with all values equaling 1.
@@ -43,14 +43,14 @@ print(a)
 b = np.ones((5,2,3))
 
 
-# In[112]:
+# In[189]:
 
 
 #6. Print b.
 print(b)
 
 
-# In[113]:
+# In[190]:
 
 
 #7. Do a and b have the same size? How do you prove that in Python code?
@@ -62,7 +62,7 @@ if len_a == len_b:
     print("a size es igual a b size")
 
 
-# In[114]:
+# In[191]:
 
 
 #8. Are you able to add a and b? Why or why not?
@@ -71,7 +71,7 @@ print(np.add(a, b))
 #tener diferentes dimensiones
 
 
-# In[125]:
+# In[225]:
 
 
 #9. Transpose b so that it has the same structure of a (i.e. become a 2x3x5 array). 
@@ -80,7 +80,7 @@ c = np.reshape(b, (2,3,5))
 print(c)
 
 
-# In[126]:
+# In[228]:
 
 
 #10. Try to add a and c. Now it should work. Assign the sum to varialbe "d". But why does it work now?
@@ -89,7 +89,7 @@ print(d)
 #Now a and d have the same shape
 
 
-# In[127]:
+# In[229]:
 
 
 #11. Print a and d. Notice the difference and relation of the two array in terms of the values? Explain.
@@ -98,7 +98,7 @@ print(d)
 #La diferencia es que en 'd' se ha sumado a cada valor de 'a' el valor '1'.
 
 
-# In[128]:
+# In[230]:
 
 
 #12. Multiply a and c. Assign the result to e.
@@ -106,7 +106,7 @@ e = np.multiply(a, c)
 print(e)
 
 
-# In[129]:
+# In[231]:
 
 
 #13. Does e equal to a? Why or why not?
@@ -118,17 +118,18 @@ np.array_equal(a,e)
 #con cada valor =1
 
 
-# In[130]:
+# In[232]:
 
 
-#14. Identify the max, min, and mean values in 'd'. Assign those values to variables "d_max", "d_min", and "d_mean"
+#14. Identify the max, min, and mean values in 'd'. Assign those values to variables "
+#d_max", "d_min", and "d_mean"
 d_max = np.amax(d)
 d_min = np.amin(d)
 d_mean = np.mean(d)
 print(d_max, d_min, d_mean)
 
 
-# In[131]:
+# In[233]:
 
 
 #15. Now we want to label the values in 'd'. 
@@ -137,7 +138,7 @@ f = np.empty([2,3,5])
 print(f.shape)
 
 
-# In[132]:
+# In[288]:
 
 
 #16. Populate the values in f. For each value in d, if it's larger than d_min but smaller than d_mean, 
@@ -149,79 +150,40 @@ print(f.shape)
 #In the end, f should have only the following values: 0, 25, 50, 75, and 100.
 #Note: you don't have to use Numpy in this question.
 
-#d1 = np.copy(d)
-#print(d1[0][0][0])
-#for i in range(0,30):
-#    if d1[i][i][i] == d_max:
-#        d1[i][i][i] = 0
-        
-#d2 = np.copy(d)
-#d3 = np.copy(d)
-#d4 = np.copy(d)
-#print(d1,d2,d3,d4)
-
-x = 0
-y = 0
-z = 0
-for i in range(30):
-  if x < 2:
-    if d_mean < d[x][y][z] and d[x][y][z] < d_max:
-      f.insert((x,y,z), 75)
-      x += 1
-    elif d_mean == d[x][y][z]:
-      f.insert((x,y,z), 50)
-      x += 1 
-    elif d_min == d[x][y][z]:
-      f.insert((x,y,z), 0)
-      x += 1 
-    elif d_max == d[x][y][z]:
-      f.insert((x,y,z), 100)
-      x += 1
-  elif y < 3:
-    if d_mean < d[x][y][z] and d[x][y][z] < d_max:
-      f.insert((x,y,z), 75)
-      x += 1
-    elif d_mean == d[x][y][z]:
-      f.insert((x,y,z), 50)
-      x += 1 
-    elif d_min == d[x][y][z]:
-      f.insert((x,y,z), 0)
-      x += 1 
-    elif d_max == d[x][y][z]:
-      f.insert((x,y,z), 100)
-      x += 1
-  elif z < 5:
-    if d_mean < d[x][y][z] and d[x][y][z] < d_max:
-      f.insert((x,y,z), 75)
-      x += 1
-    elif d_mean == d[x][y][z]:
-      f.insert((x,y,z), 50)
-      x += 1 
-    elif d_min == d[x][y][z]:
-      f.insert((x,y,z), 0)
-      x += 1 
-    elif d_max == d[x][y][z]:
-      f.insert((x,y,z), 100)
-      x += 1
-
-print(f)
-print(e)
+f = np.array(d)
+f[(d > d_min) & (d < d_mean)] = 25
+f[(d < d_max) & (d > d_mean)] = 75
+f[(d == d_mean)] = 50
+f[(d == d_min)] = 0
+f[(d == d_max)] = 100
 
 
-# In[133]:
+# In[289]:
 
 
 #17. Print d and f. Do you have your expected f?
+print(d)
+print(f)
 
 
-# In[134]:
+# In[290]:
 
 
-#18. Bonus question: instead of using numbers (i.e. 0, 25, 50, 75, and 100), how to use string values 
-
-
-# In[ ]:
-
-
-
+# 18. Bonus question: instead of using numbers (i.e. 0, 25, 50, 75, and 100), how to use string values 
+f1 = f.reshape(30)
+g = f1.tolist()
+for i in range(len(g)):
+    if g[i] == 25:
+        g[i] = "B"
+    elif g[i] == 75:
+        g[i] = "D"
+    elif g[i] == 50:
+        g[i] = "C"
+    elif g[i] == 0:
+        g[i] = "A"
+    elif g[i] == 100:
+        g[i] = "E"
+g1 = np.asarray(g)
+g2 = g1.reshape(2,3,5)
+print(g2)
 
