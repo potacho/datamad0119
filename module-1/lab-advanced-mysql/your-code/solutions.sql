@@ -95,6 +95,30 @@ ORDER BY STEP_2.sum_prof_1 DESC
 LIMIT 3;
 
 
-#Challenge 3 
 
+#Challenge 3 - Creación de la tabla 'most_profiting_authors'
+CREATE TABLE most_profiting_authors
+SELECT
+	DISTINCT(STEP_2.autID_2) AS 'Author ID', 
+    STEP_2.sum_prof_1 AS 'Profit'
+FROM (
+	SELECT
+		STEP_1.titID_1 AS titID_2,
+		STEP_1.autID_1 AS autID_2, 
+		SUM(STEP_1.prof_1) AS sum_prof_1
+	FROM (
+		SELECT
+		    tit.title_id AS titID_1,
+		    aut.au_id AS autID_1, 
+		    (tit.price * sal.qty * tit.royalty / 100 * tau.royaltyper / 100) AS prof_1
+		FROM authors AS aut
+		    INNER JOIN titleauthor AS tau ON aut.au_id = tau.au_id
+		    INNER JOIN titles AS tit ON tau.title_id = tit.title_id
+		    INNER JOIN sales AS sal ON sal.title_id = tit.title_id) 
+        #GROUP BY (NO APLICA EN ESTE NIVEL)
+        AS STEP_1
+	GROUP BY autID_1, titID_1) 
+    AS STEP_2
+GROUP BY STEP_2.autID_2, STEP_2.sum_prof_1
+ORDER BY STEP_2.sum_prof_1 DESC;
 
