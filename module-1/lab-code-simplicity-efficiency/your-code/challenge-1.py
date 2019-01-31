@@ -9,7 +9,7 @@ The code is very long and messy. Refactor it according to what you have learned 
 code simplicity and efficiency.
 """
 
-
+"""
 print('Welcome to this calculator!')
 print('It can add and subtract whole numbers from zero to five')
 a = input('Please choose your first number (zero to five): ')
@@ -168,3 +168,47 @@ if (not a == 'zero' and not a == 'one' and not a == 'two' and not a == 'three' a
     print("I am not able to answer this question. Check your input.")
 
 print("Thanks for using this calculator, goodbye :)")
+"""
+
+#Este es el inicio del código simplificado
+#Se ha incluido un try-catch para generar el mensaje de "error" cuando el usuario no introduce valores correctos
+try:
+    #La parte de introducción de datos queda igual que el original
+  print('Welcome to this calculator!')
+  print('It can add and subtract whole numbers from zero to five')
+  a = input('Please choose your first number (zero to five): ')
+  b = input('What do you want to do? plus or minus: ')
+  c = input('Please choose your second number (zero to five): ')
+
+    #Se crean loops sobre diccionarios para sustituir las multiples lineas de "if's"
+  l_imput = {'zero':0,'one':1,'two':2,'three':3,'four':4,'five':5}
+
+  l_output = {'zero': 0,'one': 1,'two': 2,'three': 3,'four': 4,'five': 5, 'six': 6,'seven': 7,'eight': 8,'nine': 9,'ten': 10,'negative one': -1, 'negative two': -2, 'negative three': -3, 'negative four': -4, 'negative five': -5}
+
+  l_words = ['plus','minus']
+
+
+  for k,v in l_imput.items():
+    if a == k:
+      x = v
+
+  for i,w in l_imput.items():
+    if c == i:
+      y = w
+
+  if b == l_words[0]:
+    z = x + y
+  else:
+    z = x - y
+
+  for j,g in l_output.items():
+    if z == g:
+      result = j
+
+  solution = a+" "+b+" "+c+" "+"equals"+" "+result
+
+  print(solution)
+  print("Thanks for using this calculator, goodbye :)")
+except:
+  print("I am not able to answer this question. Check your input.")
+  print("Thanks for using this calculator, goodbye :)")
