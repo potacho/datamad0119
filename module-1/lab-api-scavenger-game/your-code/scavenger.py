@@ -8,11 +8,23 @@ import pandas as pd
 load_dotenv(dotenv_path='../.env')
 SECRET_KEY = os.getenv("KEY")
 
-source = "https://github.com/ironhack-datalabs/mad-oct-2018/forks"
-labs = requests.get(source)
-datos = labs.json()
+#Challenge 1
+source = "https://api.github.com/repos/ironhack-datalabs/datamad0119/forks"
+forks = requests.get(source)
+json_forks = forks.json()
+#print(json_forks)
+languages = list(map(lambda x: {"language":x["language"]}, json_forks))
+langs = list({v["language"]:v for v in languages}.values())
+print(langs)
 
-#forks = datos["forks_count"]
+#Challenge 2
+source = "https://api.github.com/repos/ironhack-datalabs/datamad0119/stats/participation"
+commits = requests.get(source)
+json_commits = commits.json()
+#print(json_commits)
+commits = json_commits["all"]
+commit_count = sum(commits)
+print(type(commits))
+print(commit_count)
 
-#forks = list(set([key for keys in datos for key in datos]))
-print(datos)
+#Challenge 3
