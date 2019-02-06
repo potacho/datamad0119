@@ -24,7 +24,18 @@ json_commits = commits.json()
 #print(json_commits)
 commits = json_commits["all"]
 commit_count = sum(commits)
-print(type(commits))
+#print(type(commits))
 print(commit_count)
 
 #Challenge 3
+source = "https://api.github.com/search/code?q=repo:ironhack-datalabs/scavenger+filename:.scavengerhunt"
+scavengers = requests.get(source)
+json_scavengers = scavengers.json()
+#print(json_scavengers)
+scavengers = json_scavengers["path"]
+print(scavengers)
+'''
+Estoy teniendo problemas con las sintaxis básica...entonces describo lo que pensaba hacer.
+Primero hago un json_normalize para ver si obtengo directamente los diccionarios con el path de cada
+fichero...
+'''
