@@ -1,6 +1,3 @@
-import run
-
-
 #Importación de los módulos.
 from tkinter import *
 # esta ha sido la solución: sudo apt-get install python3-tk
@@ -119,14 +116,14 @@ south_bins = pd.cut(df_south['Year'], cutoffs, labels=decade_labels)
 #Se agrupan los datos por decadas para north. Esta sería una de las salidas (parámetro -n) enviando un .html.
 df_north['Decades'] = north_bins
 df_dec_north = df_north.groupby(['Decades','Country']).sum().drop(['Year'], axis=1)
-print(df_dec_north.head(50))
-df_dec_north.to_html(open('north.html', 'w'))
+#print(df_dec_north.head(50))
+#df_dec_north.to_html(open('north.html', 'w'))
 
 #Se agrupan los datos por decadas para south. Esta sería una de las salidas (parámetro -s) enviando un .html.
 df_south['Decades'] = south_bins
 df_dec_south = df_south.groupby(['Decades','Country']).sum().drop(['Year'], axis=1)
-print(df_dec_south.head(50))
-df_dec_south.to_html(open('south.html', 'w'))
+#print(df_dec_south.head(50))
+#df_dec_south.to_html(open('south.html', 'w'))
 
 #Se agrupan los datos realizando una media para cada una de las regiones para realizar la comparativa.
 df_eu_north = df_dec_north.groupby("Decades").agg({"Suicidesx100k":"mean"})
@@ -146,6 +143,34 @@ bars = tuple(df_eu_south.index)
 y_pos = np.arange(len(bars))
 plt.bar(y_pos, height, color=['red'])
 plt.xticks(y_pos, bars)
-plt.savefig("NorthVsSouth", bbox_inches='tight')
+#plt.savefig("NorthVsSouth", bbox_inches='tight')
 
-print('funciona')
+print('\n\nSe han procesado los datos satisfactoriamente!!!\n\n')
+
+import argparse
+import subprocess 
+parser = argparse.ArgumentParser()
+parser.add_argument("-n", "--north", help="envia datos del norte de europa", action="store_true")
+parser.add_argument("-s", "--south", help="envia datos del sur de europa", action="store_true")
+parser.add_argument("-c", "--northvssouth", help="envia comparativa entre el norte y el sur de europa", action="store_true")
+args = parser.parse_args()
+if args.north:
+    df_dec_north.to_html(open('north.html', 'w'))
+    msg = "Se adjunta tabla que incluye el resultado del análisis de los datos del norte de Europa"
+    command = 'echo {} | mail --attach=/home/potacho/github/datamad0119/module-1/pipelines-project/your-code/north.html -s "Evolucion de los suicidios en el Norte de Europa" "potacho@gmail.com"'.format(msg)
+    subprocess.Popen(command, shell=True)
+    print("Se ha enviado un correo electrónico con los resultados a potacho@gmail.com\n")
+elif args.south:
+    df_dec_south.to_html(open('south.html', 'w'))
+    msg = "Se adjunta tabla que incluye el resultado del análisis de los datos del sur de Europa"
+    command = 'echo {} | mail --attach=/home/potacho/github/datamad0119/module-1/pipelines-project/your-code/south.html -s "Evolucion de los suicidios en el Sur de Europa" "potacho@gmail.com"'.format(msg)
+    subprocess.Popen(command, shell=True)
+    print("Se ha enviado un correo electrónico con los resultados a potacho@gmail.com\n")
+elif args.northvssouth:
+    plt.savefig("NorthVsSouth", bbox_inches='tight')
+    msg = "Se adjunta gráfico que incluye una comparativa entre el Norte y el Sur de Europa"
+    command = 'echo {} | mail --attach=/home/potacho/github/datamad0119/module-1/pipelines-project/your-code/NorthVsSouth.png -s "Evolucion de los suicidios en Europa Occidental" "potacho@gmail.com"'.format(msg)
+    subprocess.Popen(command, shell=True)
+    print("Se ha enviado un correo electrónico con los resultados a potacho@gmail.com\n")
+
+
