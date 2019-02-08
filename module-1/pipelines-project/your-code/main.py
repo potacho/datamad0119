@@ -157,19 +157,20 @@ args = parser.parse_args()
 if args.north:
     df_dec_north.to_html(open('north.html', 'w'))
     msg = "Se adjunta tabla que incluye el resultado del análisis de los datos del norte de Europa"
-    command = 'echo {} | mail --attach=/home/potacho/github/datamad0119/module-1/pipelines-project/your-code/north.html -s "Evolucion de los suicidios en el Norte de Europa" "potacho@gmail.com"'.format(msg)
+    #path = '/home/potacho/github/datamad0119/module-1/pipelines-project/your-code'
+    command = 'echo {} | mail --attach=/home/potacho/github/datamad0119/module-1/pipelines-project/your-code/north.html --attach=/home/potacho/github/datamad0119/module-1/pipelines-project/your-code/datos_cw.csv -s "Evolucion de los suicidios en el Norte de Europa" "potacho@gmail.com"'.format(msg)
     subprocess.Popen(command, shell=True)
     print("Se ha enviado un correo electrónico con los resultados a potacho@gmail.com\n")
 elif args.south:
     df_dec_south.to_html(open('south.html', 'w'))
     msg = "Se adjunta tabla que incluye el resultado del análisis de los datos del sur de Europa"
-    command = 'echo {} | mail --attach=/home/potacho/github/datamad0119/module-1/pipelines-project/your-code/south.html -s "Evolucion de los suicidios en el Sur de Europa" "potacho@gmail.com"'.format(msg)
+    command = 'echo {} | mail --attach=/home/potacho/github/datamad0119/module-1/pipelines-project/your-code/south.html --attach=/home/potacho/github/datamad0119/module-1/pipelines-project/your-code/datos_cw.csv -s "Evolucion de los suicidios en el Sur de Europa" "potacho@gmail.com"'.format(msg)
     subprocess.Popen(command, shell=True)
     print("Se ha enviado un correo electrónico con los resultados a potacho@gmail.com\n")
 elif args.northvssouth:
     plt.savefig("NorthVsSouth", bbox_inches='tight')
     msg = "Se adjunta gráfico que incluye una comparativa entre el Norte y el Sur de Europa"
-    command = 'echo {} | mail --attach=/home/potacho/github/datamad0119/module-1/pipelines-project/your-code/NorthVsSouth.png -s "Evolucion de los suicidios en Europa Occidental" "potacho@gmail.com"'.format(msg)
+    command = 'echo {} | mail --attach=/home/potacho/github/datamad0119/module-1/pipelines-project/your-code/NorthVsSouth.png --attach=/home/potacho/github/datamad0119/module-1/pipelines-project/your-code/datos_cw.csv -s "Evolucion de los suicidios en Europa Occidental" "potacho@gmail.com"'.format(msg)
     subprocess.Popen(command, shell=True)
     print("Se ha enviado un correo electrónico con los resultados a potacho@gmail.com\n")
 
